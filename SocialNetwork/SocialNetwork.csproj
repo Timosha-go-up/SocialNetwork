@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="BLL\Servises\" />
-    <Folder Include="DAL\DB\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,9 +18,6 @@
 
   <ItemGroup>
     <None Update="DAL\DB\social_network.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="DAL\DB\social_network_bd.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
