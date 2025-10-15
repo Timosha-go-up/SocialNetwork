@@ -9,7 +9,7 @@ namespace SocialNetwork.DAL.Repositories
 {
     namespace SocialNetwork.DAL.Repositories
     {
-        internal class MessageRepository : BaseRepository, IMessageRepository
+       public class MessageRepository : BaseRepository, IMessageRepository
         {
             public int Create(MessageEntity messageEntity)
             {

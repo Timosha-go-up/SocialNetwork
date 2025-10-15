@@ -9,12 +9,21 @@
 
   <ItemGroup>
     <Folder Include="BLL\Servises\" />
+    <Folder Include="DAL\DB\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.66" />
-    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.119" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DAL\DB\social_network.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DAL\DB\social_network_bd.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

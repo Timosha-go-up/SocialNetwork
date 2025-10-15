@@ -1,15 +1,12 @@
 ﻿using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.DAL.Repositories
 {
-   public class BaseRepository
+    public class BaseRepository
     {
         protected T QueryFirstOrDefault<T>(string sql, object parameters = null)
         {
@@ -44,4 +41,3 @@ namespace SocialNetwork.DAL.Repositories
         }
     }
 }
-

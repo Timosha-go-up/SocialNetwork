@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.DAL.Repositories
 {
-    internal class FriendRepository : BaseRepository, IFriendRepository
+    public class FriendRepository : BaseRepository, IFriendRepository
     {
         public IEnumerable<FriendEntity> FindAllByUserId(int userId)
         {

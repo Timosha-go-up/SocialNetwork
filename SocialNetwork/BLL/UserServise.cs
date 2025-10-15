@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SocialNetwork.BLL.Services
 {
-    internal class UserServise
+    public class UserServise
     {
         IUserRepository userRepository;
         public UserServise()

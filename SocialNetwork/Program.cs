@@ -1,18 +1,14 @@
-﻿using SocialNetwork.BLL;
-using SocialNetwork.BLL.Models;
+﻿using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
 using System;
 
 namespace SocialNetwork
 {
-    internal class Program
+    class Program
     {
-
-     public static UserServise userServise = new UserServise();
-
+        public static UserServise userService = new UserServise();
         static void Main(string[] args)
         {
-
             Console.WriteLine("Добро пожаловать в социальную сеть.");
 
             while (true)
@@ -40,7 +36,7 @@ namespace SocialNetwork
 
                 try
                 {
-                    userServise.Register(userRegistrationData);
+                    userService.Register(userRegistrationData);
                     Console.WriteLine("Регистрация произошла успешно!");
                 }
 
@@ -54,13 +50,9 @@ namespace SocialNetwork
                     Console.WriteLine($"Произошла ошибка: {ex.Message}");
                 }
 
-
-
                 Console.ReadLine();
             }
 
         }
     }
-       
-    
 }
