@@ -35,7 +35,7 @@ namespace SocialNetwork.PLL.Views
 
             try
             {
-                this.userService.Register(userRegistrationData, new ArgumentNullException());
+                this.userService.Register(userRegistrationData);
 
                 SuccessMessage.Show("Ваш профиль успешно создан. Теперь Вы можете войти в систему под своими учетными данными.");
             }
