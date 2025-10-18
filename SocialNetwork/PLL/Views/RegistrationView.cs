@@ -1,5 +1,6 @@
 ﻿using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
+using SocialNetwork.BLL.Services.UserServices;
 using SocialNetwork.PLL.Helpers;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,10 @@ namespace SocialNetwork.PLL.Views
 {
     public class RegistrationView
     {
-        UserService userService;
-        public RegistrationView(UserService userService)
+        UserRegistrationService _userRegistrationService;
+        public RegistrationView(UserRegistrationService userService)
         {
-            this.userService = userService;
+            this._userRegistrationService = userService;
         }
 
         public void Show()
@@ -35,7 +36,7 @@ namespace SocialNetwork.PLL.Views
 
             try
             {
-                this.userService.Register(userRegistrationData);
+                this._userRegistrationService.Register(userRegistrationData);
 
                 SuccessMessage.Show("Ваш профиль успешно создан. Теперь Вы можете войти в систему под своими учетными данными.");
             }

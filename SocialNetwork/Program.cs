@@ -1,15 +1,17 @@
 ﻿using SocialNetwork.BLL.Exceptions;
 using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
+using SocialNetwork.BLL.Services.UserServices;
+using SocialNetwork.BLL.Services.UserServices.Common;
+using SocialNetwork.DAL.Repositories;
 using SocialNetwork.PLL.Views;
 using System;
+using static SocialNetwork.BLL.Services.UserServices.UserRegistrationService;
 
 namespace SocialNetwork
 {
     class Program
-    {
-        static MessageService messageService;
-        static UserService userService;
+    {                                
         public static MainView mainView;
         public static RegistrationView registrationView;
         public static AuthenticationView authenticationView;
@@ -23,24 +25,21 @@ namespace SocialNetwork
 
         static void Main(string[] args)
         {
-            userService = new UserService();
-            messageService = new MessageService();
-
-            mainView = new MainView();
-            registrationView = new RegistrationView(userService);
-            authenticationView = new AuthenticationView(userService);
-            userMenuView = new UserMenuView(userService);
+            MessageService messageService  = new();
+            UserModelFactory userModelFactory = new(messageService);
+            UserRepository userRepository = new();
+            UserRegistrationService userRegistrationService = new(userRepository);
+            UserAuthenticationService userAuthenticationService =new(userRepository,userModelFactory);
+            UserProfileService userProfileService = new(userRepository,userModelFactory);
+            userMenuView = new UserMenuView(userProfileService);
+            registrationView = new RegistrationView(userRegistrationService);
+            authenticationView = new AuthenticationView(userAuthenticationService);
+            mainView = new MainView();  
             userInfoView = new UserInfoView();
-            userDataUpdateView = new UserDataUpdateView(userService);
-            messageSendingView = new MessageSendingView(messageService, userService);
-            userIncomingMessageView = new UserIncomingMessageView();
-            userOutcomingMessageView = new UserOutcomingMessageView();
+            
+           
 
-            while (true)
-            {
-                mainView.Show();
-            }
-
+            while (true) { mainView.Show(); }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
+using SocialNetwork.BLL.Services.UserServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace SocialNetwork.PLL.Views
 {
     public class UserMenuView
     {
-        UserService userService;
-        public UserMenuView(UserService userService)
+        UserProfileService _userProfileService; 
+        public UserMenuView(UserProfileService profileService)
         {
-            this.userService = userService;
+            this._userProfileService = profileService;
         }
 
         public void Show(User user)
