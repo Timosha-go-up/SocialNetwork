@@ -1,6 +1,8 @@
 ﻿using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
 using SocialNetwork.BLL.Services.UserServices;
+using SocialNetwork.PLL.Views.AccountManagementView;
+using SocialNetwork.PLL.Views.AccountManagementView.MessageViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace SocialNetwork.PLL.Views
         private readonly AddFriendView _addFriendView;
         private readonly MessageSendingView _messageSendingView;
         private readonly UserIncomingMessageView _userIncomingMessageView;
-        private readonly UserOutcomingMessageView _userOutcomingMessageView;
+        private readonly UserOutgoingMessageView _userOutcomingMessageView;
 
         public UserMenuView(
             UserProfileService profileService,
@@ -26,7 +28,7 @@ namespace SocialNetwork.PLL.Views
             AddFriendView addFriendView,
             MessageSendingView messageSendingView,
             UserIncomingMessageView userIncomingMessageView,
-            UserOutcomingMessageView userOutcomingMessageView)
+            UserOutgoingMessageView userOutcomingMessageView)
         {
             _profileService = profileService;
             _userInfoView = userInfoView;
@@ -76,6 +78,10 @@ namespace SocialNetwork.PLL.Views
                         break;
                     case "6":
                         _userOutcomingMessageView.Show(user.OutgoingMessages);
+                        break;
+
+                    default:
+                        Console.WriteLine("wrong input");
                         break;
                 }
             }

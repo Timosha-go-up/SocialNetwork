@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialNetwork.PLL.Views
+namespace SocialNetwork.PLL.Views.AccountManagementView.MessageViews
 {
 
     public class UserIncomingMessageView

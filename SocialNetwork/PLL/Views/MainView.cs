@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialNetwork.PLL.Views.AccountManagementView;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace SocialNetwork.PLL.Views
 
         public void Show()
         {
-            Console.WriteLine("Войти в профиль (нажмите 1)");
+            Console.WriteLine("\n\nВойти в профиль (нажмите 1)");
             Console.WriteLine("Зарегистрироваться (нажмите 2)");
 
             switch (Console.ReadLine())
@@ -29,6 +30,10 @@ namespace SocialNetwork.PLL.Views
                     break;
                 case "2":
                     _registrationView.Show();   // Используем переданный экземпляр
+                    break;
+
+                default:
+                    Console.WriteLine("wrong input");
                     break;
             }
         }

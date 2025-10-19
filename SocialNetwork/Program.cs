@@ -1,16 +1,21 @@
 ﻿using SocialNetwork.BLL.Models;
+using SocialNetwork.BLL.Services;
 using SocialNetwork.PLL.Views;
+using SocialNetwork.PLL.Views.AccountManagementView;
+using SocialNetwork.PLL.Views.AccountManagementView.MessageViews;
 
 namespace SocialNetwork
 {
     class Program
     {
         static void Main(string[] args)
-        {
-            var deps = new AppDependencies();
+        {    
+            // инициализация тестовых пользователей
+            var deps = new ServiceContainer(initializeTestData: true);
+            //без тестовых пользователей
+            // var deps = new ServiceContainer();
 
 
-            
 
             // Представления пользователя
             var userInfoView = new UserInfoView();
@@ -19,7 +24,7 @@ namespace SocialNetwork
             // Сообщения
             var messageSendingView = new MessageSendingView(deps.MessageService, deps.UserProfileService);
             var userIncomingMessageView = new UserIncomingMessageView();
-            var userOutcomingMessageView = new UserOutcomingMessageView();
+            var userOutcomingMessageView = new UserOutgoingMessageView();
 
             // Другие представления
             var registrationView = new RegistrationView(deps.UserRegistrationService);

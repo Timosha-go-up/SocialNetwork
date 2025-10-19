@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialNetwork.PLL.Views
+namespace SocialNetwork.PLL.Views.AccountManagementView
 {
     public class RegistrationView
     {

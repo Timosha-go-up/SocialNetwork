@@ -1,5 +1,4 @@
-﻿
-namespace SocialNetwork.BLL.Services
+﻿namespace SocialNetwork.BLL.Exceptions
 {
     [Serializable]
     internal class FriendAlreadyExistsException : Exception
