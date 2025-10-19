@@ -11,9 +11,9 @@ namespace SocialNetwork.BLL.Services.UserServices
     public class UserAuthenticationService
     {
         private readonly IUserRepository _userRepository;
-        private readonly UserModelFactory _modelFactory;
+        private readonly IUserModelFactory _modelFactory;
 
-        public UserAuthenticationService(IUserRepository userRepository,UserModelFactory modelFactory)
+        public UserAuthenticationService(IUserRepository userRepository,IUserModelFactory modelFactory)
                         
         {
             _userRepository = userRepository;
@@ -26,7 +26,7 @@ namespace SocialNetwork.BLL.Services.UserServices
             if (userEntity == null)
                 throw new UserNotFoundException();
 
-            if (userEntity.password != data.Password) 
+            if (userEntity.Password != data.Password) 
                 throw new WrongPasswordException();
 
             return _modelFactory.CreateFromEntity(userEntity);

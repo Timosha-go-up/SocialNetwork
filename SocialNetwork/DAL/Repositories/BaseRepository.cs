@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -10,12 +11,30 @@ namespace SocialNetwork.DAL.Repositories
     {
         protected T QueryFirstOrDefault<T>(string sql, object parameters = null)
         {
-            using (var connection = CreateConnection())
+            try
             {
-                connection.Open();
-                return connection.QueryFirstOrDefault<T>(sql, parameters);
+                using (var connection = CreateConnection())
+                {
+                    connection.Open();
+                    Console.WriteLine($"Соединение открыто: {connection.State}");
+                    Console.WriteLine($"Выполняется запрос: {sql}");
+                    Console.WriteLine($"Параметры: {JsonConvert.SerializeObject(parameters)}");
+
+                    // Без указания commandType
+                    return connection.QueryFirstOrDefault<T>(sql, parameters);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
+                throw;
             }
         }
+
+
+
+
 
         protected List<T> Query<T>(string sql, object parameters = null)
         {

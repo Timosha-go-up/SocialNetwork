@@ -7,11 +7,11 @@ namespace SocialNetwork.BLL.Services.UserServices
 {
    
 
-    public class UserProfileService(IUserRepository userRepository, UserModelFactory modelFactory)        
+    public class UserProfileService(IUserRepository userRepository, IUserModelFactory modelFactory)        
       
     {
         private readonly IUserRepository _userRepository = userRepository;
-        private readonly UserModelFactory _modelFactory = modelFactory;
+        private readonly IUserModelFactory _modelFactory = modelFactory;
 
         public User FindByEmail(string email)
         {
@@ -29,14 +29,14 @@ namespace SocialNetwork.BLL.Services.UserServices
         {
             var updatableUserEntity = new UserEntity
             {
-                id = user.Id,
-                firstname = user.FirstName,
-                lastname = user.LastName,
-                password = user.Password,
-                email = user.Email,
-                photo = user.Photo,
-                favorite_movie = user.FavoriteMovie,
-                favorite_book = user.FavoriteBook
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Password = user.Password,
+                Email = user.Email,
+                Photo = user.Photo,
+                FavoriteMovie = user.FavoriteMovie,
+                FavoriteBook = user.FavoriteBook
             };
 
             if (_userRepository.Update(updatableUserEntity) == 0)

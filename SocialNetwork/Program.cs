@@ -1,45 +1,65 @@
-﻿using SocialNetwork.BLL.Exceptions;
-using SocialNetwork.BLL.Models;
-using SocialNetwork.BLL.Services;
-using SocialNetwork.BLL.Services.UserServices;
-using SocialNetwork.BLL.Services.UserServices.Common;
-using SocialNetwork.DAL.Repositories;
+﻿using SocialNetwork.BLL.Models;
 using SocialNetwork.PLL.Views;
-using System;
-using static SocialNetwork.BLL.Services.UserServices.UserRegistrationService;
 
 namespace SocialNetwork
 {
     class Program
-    {                                
-        public static MainView mainView;
-        public static RegistrationView registrationView;
-        public static AuthenticationView authenticationView;
-        public static UserMenuView userMenuView;
-        public static UserInfoView userInfoView;
-        public static UserDataUpdateView userDataUpdateView;
-        public static MessageSendingView messageSendingView;
-        public static UserIncomingMessageView userIncomingMessageView;
-        public static UserOutcomingMessageView userOutcomingMessageView;
-
-
+    {
         static void Main(string[] args)
         {
-            MessageService messageService  = new();
-            UserModelFactory userModelFactory = new(messageService);
-            UserRepository userRepository = new();
-            UserRegistrationService userRegistrationService = new(userRepository);
-            UserAuthenticationService userAuthenticationService =new(userRepository,userModelFactory);
-            UserProfileService userProfileService = new(userRepository,userModelFactory);
-            userMenuView = new UserMenuView(userProfileService);
-            registrationView = new RegistrationView(userRegistrationService);
-            authenticationView = new AuthenticationView(userAuthenticationService);
-            mainView = new MainView();  
-            userInfoView = new UserInfoView();
-            
-           
+            var deps = new AppDependencies();
 
-            while (true) { mainView.Show(); }
+            var testUsers = new List<User>
+            {
+             new User("Иван", "Иванов", "ivan@example.com","12345678"),
+             new User("Мария", "Петрова", "maria@example.com", "543211234"),
+             new User("Алексей", "Сидоров", "alex@example.com", "qwerty123"),
+             new User("Елена", "Васильева", "elena@example.com", "password12"),
+             new User("Дмитрий", "Николаев", "dmitry@example.com", "test123321")
+             };
+
+            foreach (var user in testUsers)
+            {
+                deps.UserRepository.Add(user);
+               
+            }
+
+            // Представления пользователя
+            var userInfoView = new UserInfoView();
+            var userDataUpdateView = new UserDataUpdateView(deps.UserProfileService);
+
+            // Сообщения
+            var messageSendingView = new MessageSendingView(deps.MessageService, deps.UserProfileService);
+            var userIncomingMessageView = new UserIncomingMessageView();
+            var userOutcomingMessageView = new UserOutcomingMessageView();
+
+            // Другие представления
+            var registrationView = new RegistrationView(deps.UserRegistrationService);
+            var addFriendView = new AddFriendView(deps.FriendService, deps.UserProfileService);
+
+            // Составные представления
+            var userMenuView = new UserMenuView(
+                deps.UserProfileService,
+                userInfoView,
+                userDataUpdateView,
+                addFriendView,
+                messageSendingView,
+                userIncomingMessageView,
+                userOutcomingMessageView
+            );
+
+            var authenticationView = new AuthenticationView(
+                deps.UserAuthenticationService,
+                userMenuView
+            );
+
+            var mainView = new MainView(authenticationView, registrationView);
+
+
+            while (true)
+            {
+                mainView.Show();
+            }
         }
     }
 }

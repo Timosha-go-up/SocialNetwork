@@ -34,10 +34,10 @@ namespace SocialNetwork.BLL.Services.UserServices
             // 3. Создание сущности
             var userEntity = new UserEntity
             {
-                firstname = data.FirstName,
-                lastname = data.LastName,
-                password = data.Password,  
-                email = data.Email
+                FirstName = data.FirstName,
+               LastName = data.LastName,
+               Password = data.Password,  
+                Email = data.Email
             };
 
             // 4. Сохранение в БД

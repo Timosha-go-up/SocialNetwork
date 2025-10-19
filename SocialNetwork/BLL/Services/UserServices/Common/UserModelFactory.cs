@@ -11,11 +11,12 @@ namespace SocialNetwork.BLL.Services.UserServices.Common
 {
     public class UserModelFactory : IUserModelFactory
     {
-        private readonly MessageService _messageService;
+        private readonly IMessageService _messageService;
 
-        public UserModelFactory(MessageService messageService)
+        public UserModelFactory(IMessageService messageService)
         {
-            _messageService = messageService;
+            _messageService = messageService ??
+                throw new ArgumentNullException(nameof(messageService));
         }
 
         public User CreateFromEntity(UserEntity entity)
@@ -23,23 +24,24 @@ namespace SocialNetwork.BLL.Services.UserServices.Common
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            var incomingMessages = _messageService.GetIncomingMessagesByUserId(entity.id);
-            var outgoingMessages = _messageService.GetOutcomingMessagesByUserId(entity.id);
+            var incomingMessages = _messageService.GetIncomingMessagesByUserId(entity.Id) ?? new List<Message>();
+            var outgoingMessages = _messageService.GetOutgoingMessagesByUserId(entity.Id) ?? new List<Message>();
 
             return new User(
-                entity.id,
-                entity.firstname,
-                entity.lastname,
-                entity.password,
-                entity.email,
-                entity.photo,
-                entity.favorite_movie,
-                entity.favorite_book,
+                entity.FirstName,
+                entity.LastName,
+                entity.Email,
+                entity.Password,
+                entity.Photo,
+                entity.FavoriteMovie,
+                entity.FavoriteBook,
                 incomingMessages,
                 outgoingMessages
             );
         }
+
     }
+
 
 
     public interface IUserModelFactory
@@ -63,7 +65,7 @@ namespace SocialNetwork.BLL.Services.UserServices.Common
 
             // Получаем email друга по friend_id
             var friendUser = _userRepository.FindById(entity.friend_id);
-            var friendEmail = friendUser?.email ?? "unknown@example.com";
+            var friendEmail = friendUser?.Email ?? "unknown@example.com";
 
             return new Friend(
                 entity.id,

@@ -13,10 +13,15 @@ namespace SocialNetwork.PLL.Views
 {
     public class AuthenticationView
     {
-        UserAuthenticationService userAuthenticationService;
-        public AuthenticationView(UserAuthenticationService userAuthenticationService)
+        private readonly UserAuthenticationService _userAuthenticationService;
+        private readonly UserMenuView _userMenuView;
+
+        public AuthenticationView(
+            UserAuthenticationService userAuthenticationService,
+            UserMenuView userMenuView)
         {
-            this.userAuthenticationService = userAuthenticationService;
+            _userAuthenticationService = userAuthenticationService;
+            _userMenuView = userMenuView;
         }
 
         public void Show()
@@ -31,25 +36,23 @@ namespace SocialNetwork.PLL.Views
 
             try
             {
-                var user = this.userAuthenticationService.Authenticate(authenticationData);
+                var user = _userAuthenticationService.Authenticate(authenticationData);
 
                 SuccessMessage.Show("Вы успешно вошли в социальную сеть!");
                 SuccessMessage.Show("Добро пожаловать " + user.FirstName);
 
-                Program.userMenuView.Show(user);
+                _userMenuView.Show(user); // Вызываем метод у переданного экземпляра
             }
-
             catch (WrongPasswordException)
             {
                 AlertMessage.Show("Пароль не корректный!");
             }
-
             catch (UserNotFoundException)
             {
                 AlertMessage.Show("Пользователь не найден!");
             }
-
         }
     }
+
 
 }

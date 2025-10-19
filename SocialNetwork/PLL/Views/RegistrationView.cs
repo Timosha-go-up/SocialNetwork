@@ -28,11 +28,13 @@ namespace SocialNetwork.PLL.Views
             Console.Write("Ваша фамилия:");
             userRegistrationData.LastName = Console.ReadLine();
 
-            Console.Write("Пароль:");
-            userRegistrationData.Password = Console.ReadLine();
+            
 
             Console.Write("Почтовый адрес:");
             userRegistrationData.Email = Console.ReadLine();
+
+            Console.Write("Пароль:");
+            userRegistrationData.Password = Console.ReadLine();
 
             try
             {

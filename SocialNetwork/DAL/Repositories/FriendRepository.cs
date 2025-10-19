@@ -25,7 +25,7 @@ namespace SocialNetwork.DAL.Repositories
         }
     }
 
-    internal interface IFriendRepository
+    public interface IFriendRepository
     {
         int Create(FriendEntity friendEntity);
         IEnumerable<FriendEntity> FindAllByUserId(int userId);

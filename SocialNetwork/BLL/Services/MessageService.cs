@@ -11,7 +11,14 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.BLL.Services
 {
-    public class MessageService
+    public interface IMessageService
+    {
+        IEnumerable<Message> GetIncomingMessagesByUserId(int recipientId);
+        IEnumerable<Message> GetOutgoingMessagesByUserId(int senderId);
+        void SendMessage(MessageSendingData messageSendingData);
+    }
+
+    public class MessageService : IMessageService
     {
         IMessageRepository messageRepository;
         IUserRepository userRepository;
@@ -30,13 +37,13 @@ namespace SocialNetwork.BLL.Services
                 var senderUserEntity = userRepository.FindById(m.sender_id);
                 var recipientUserEntity = userRepository.FindById(m.recipient_id);
 
-                messages.Add(new Message(m.id, m.content, senderUserEntity.email, recipientUserEntity.email));
+                messages.Add(new Message(m.id, m.content, senderUserEntity.Email, recipientUserEntity.Email));
             });
 
             return messages;
         }
 
-        public IEnumerable<Message> GetOutcomingMessagesByUserId(int senderId)
+        public IEnumerable<Message> GetOutgoingMessagesByUserId(int senderId)
         {
             var messages = new List<Message>();
 
@@ -45,7 +52,7 @@ namespace SocialNetwork.BLL.Services
                 var senderUserEntity = userRepository.FindById(m.sender_id);
                 var recipientUserEntity = userRepository.FindById(m.recipient_id);
 
-                messages.Add(new Message(m.id, m.content, senderUserEntity.email, recipientUserEntity.email));
+                messages.Add(new Message(m.id, m.content, senderUserEntity.Email, recipientUserEntity.Email));
             });
 
             return messages;
@@ -66,7 +73,7 @@ namespace SocialNetwork.BLL.Services
             {
                 content = messageSendingData.Content,
                 sender_id = messageSendingData.SenderId,
-                recipient_id = findUserEntity.id
+                recipient_id = findUserEntity.Id
             };
 
             if (this.messageRepository.Create(messageEntity) == 0)

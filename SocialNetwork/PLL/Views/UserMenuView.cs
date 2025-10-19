@@ -11,10 +11,31 @@ namespace SocialNetwork.PLL.Views
 {
     public class UserMenuView
     {
-        UserProfileService _userProfileService; 
-        public UserMenuView(UserProfileService profileService)
+        private readonly UserProfileService _profileService;
+        private readonly UserInfoView _userInfoView;
+        private readonly UserDataUpdateView _userDataUpdateView;
+        private readonly AddFriendView _addFriendView;
+        private readonly MessageSendingView _messageSendingView;
+        private readonly UserIncomingMessageView _userIncomingMessageView;
+        private readonly UserOutcomingMessageView _userOutcomingMessageView;
+
+        public UserMenuView(
+            UserProfileService profileService,
+            UserInfoView userInfoView,
+            UserDataUpdateView userDataUpdateView,
+            AddFriendView addFriendView,
+            MessageSendingView messageSendingView,
+            UserIncomingMessageView userIncomingMessageView,
+            UserOutcomingMessageView userOutcomingMessageView)
         {
-            this._userProfileService = profileService;
+            _profileService = profileService;
+            _userInfoView = userInfoView;
+            _userDataUpdateView = userDataUpdateView;
+            _addFriendView = addFriendView;
+            _messageSendingView = messageSendingView;
+            _userIncomingMessageView = userIncomingMessageView;
+            _userOutcomingMessageView = userOutcomingMessageView;
+
         }
 
         public void Show(User user)
@@ -39,38 +60,27 @@ namespace SocialNetwork.PLL.Views
                 switch (keyValue)
                 {
                     case "1":
-                        {
-                            Program.userInfoView.Show(user);
-                            break;
-                        }
+                        _userInfoView.Show(user);
+                        break;
                     case "2":
-                        {
-                            Program.userDataUpdateView.Show(user);
-                            break;
-                        }
-
+                        _userDataUpdateView.Show(user);
+                        break;
+                    case "3":
+                        _addFriendView.Show(user);
+                        break;
                     case "4":
-                        {
-                            Program.messageSendingView.Show(user);
-                            break;
-                        }
-
+                        _messageSendingView.Show(user);
+                        break;
                     case "5":
-                        {
-
-                            Program.userIncomingMessageView.Show(user.IncomingMessages);
-                            break;
-                        }
-
+                        _userIncomingMessageView.Show(user.IncomingMessages);
+                        break;
                     case "6":
-                        {
-                            Program.userOutcomingMessageView.Show(user.OutgoingMessages);
-                            break;
-                        }
+                        _userOutcomingMessageView.Show(user.OutgoingMessages);
+                        break;
                 }
             }
-
         }
     }
+
 
 }
