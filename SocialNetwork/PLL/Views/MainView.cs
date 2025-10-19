@@ -8,6 +8,15 @@ namespace SocialNetwork.PLL.Views
 {
     public class MainView
     {
+        private readonly AuthenticationView _authenticationView;
+        private readonly RegistrationView _registrationView;
+
+        public MainView(AuthenticationView authenticationView, RegistrationView registrationView)
+        {
+            _authenticationView = authenticationView;
+            _registrationView = registrationView;
+        }
+
         public void Show()
         {
             Console.WriteLine("Войти в профиль (нажмите 1)");
@@ -16,17 +25,13 @@ namespace SocialNetwork.PLL.Views
             switch (Console.ReadLine())
             {
                 case "1":
-                    {
-                        Program.authenticationView.Show();
-                        break;
-                    }
-
+                    _authenticationView.Show(); // Используем переданный экземпляр
+                    break;
                 case "2":
-                    {
-                        Program.registrationView.Show();
-                        break;
-                    }
+                    _registrationView.Show();   // Используем переданный экземпляр
+                    break;
             }
         }
     }
-    }
+
+}

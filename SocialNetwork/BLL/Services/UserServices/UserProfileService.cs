@@ -5,13 +5,18 @@ using SocialNetwork.DAL.Entities;
 using SocialNetwork.DAL.Repositories;
 namespace SocialNetwork.BLL.Services.UserServices
 {
-   
+    public interface IUserProfileService
+    {
+        User FindByEmail(string email);
+        User FindById(int id);
+        void Update(User user);
+    }
 
-    public class UserProfileService(IUserRepository userRepository, UserModelFactory modelFactory)        
-      
+    public class UserProfileService(IUserRepository userRepository, IUserModelFactory modelFactory) : IUserProfileService
+
     {
         private readonly IUserRepository _userRepository = userRepository;
-        private readonly UserModelFactory _modelFactory = modelFactory;
+        private readonly IUserModelFactory _modelFactory = modelFactory;
 
         public User FindByEmail(string email)
         {

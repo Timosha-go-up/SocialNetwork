@@ -11,7 +11,14 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.BLL.Services
 {
-    public class MessageService
+    public interface IMessageService
+    {
+        IEnumerable<Message> GetIncomingMessagesByUserId(int recipientId);
+        IEnumerable<Message> GetOutcomingMessagesByUserId(int senderId);
+        void SendMessage(MessageSendingData messageSendingData);
+    }
+
+    public class MessageService : IMessageService
     {
         IMessageRepository messageRepository;
         IUserRepository userRepository;

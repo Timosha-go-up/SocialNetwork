@@ -11,9 +11,9 @@ namespace SocialNetwork.BLL.Services.UserServices.Common
 {
     public class UserModelFactory : IUserModelFactory
     {
-        private readonly MessageService _messageService;
+        private readonly IMessageService _messageService;
 
-        public UserModelFactory(MessageService messageService)
+        public UserModelFactory(IMessageService messageService)
         {
             _messageService = messageService;
         }
