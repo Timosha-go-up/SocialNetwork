@@ -1,14 +1,8 @@
 ﻿using SocialNetwork.BLL.Models;
-using SocialNetwork.BLL.Services;
 using SocialNetwork.BLL.Services.UserServices;
+using SocialNetwork.PLL.MenuDesign;
 using SocialNetwork.PLL.Views.AccountManagementView;
 using SocialNetwork.PLL.Views.AccountManagementView.MessageViews;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace SocialNetwork.PLL.Views
 {
     public class UserMenuView
@@ -37,25 +31,50 @@ namespace SocialNetwork.PLL.Views
             _messageSendingView = messageSendingView;
             _userIncomingMessageView = userIncomingMessageView;
             _userOutcomingMessageView = userOutcomingMessageView;
-
-        }
-
+        }        
+       
         public void Show(User user)
         {
+
             while (true)
             {
-                Console.WriteLine("Входящие сообщения: {0}", user.IncomingMessages.Count());
-                Console.WriteLine("Исходящие сообщения: {0}", user.OutgoingMessages.Count());
+                int incomingCount = user?.IncomingMessages?.Count() ?? 0;
+                int outgoingCount = user?.OutgoingMessages?.Count() ?? 0;
 
-                Console.WriteLine("Просмотреть информацию о моём профиле (нажмите 1)");
-                Console.WriteLine("Редактировать мой профиль (нажмите 2)");
-                Console.WriteLine("Добавить в друзья (нажмите 3)");
-                Console.WriteLine("Написать сообщение (нажмите 4)");
-                Console.WriteLine("Просмотреть входящие сообщения (нажмите 5)");
-                Console.WriteLine("Просмотреть исходящие сообщения (нажмите 6)");
-                Console.WriteLine("Выйти из профиля (нажмите 7)");
+                MenuData menuData = new(
+                texts: 
+                [
+                "Входящие сообщения:",
+                "Исходящие сообщения:",
+                "Просмотреть информацию о моём профиле",
+                "Редактировать мой профиль",
+                "Добавить в друзья",
+                "Написать сообщение",
+                "Просмотреть входящие сообщения ",
+                "Просмотреть исходящие сообщения ",
+                "Выйти из профиля "
+                ],
 
-                string keyValue = Console.ReadLine();
+                suffixes:
+                [
+                 string.Empty,
+                 string.Empty,
+                 "(нажмите)",
+                 "(нажмите)",
+                 "(нажмите)",
+                 "(нажмите)",
+                 "(нажмите)",
+                 "(нажмите)",
+                 "(нажмите)",
+                ],
+                numbers: [incomingCount,outgoingCount,1,2,3,4,5,6,7]
+                );
+
+
+            var menuItems = MenuItem.CreateFromData(menuData);
+            MenuFormat.Print(menuItems);
+                                         
+                string keyValue = ReadLine();
 
                 if (keyValue == "7") break;
 
@@ -81,7 +100,7 @@ namespace SocialNetwork.PLL.Views
                         break;
 
                     default:
-                        Console.WriteLine("wrong input");
+                        WriteLine("wrong input");
                         break;
                 }
             }
@@ -89,4 +108,5 @@ namespace SocialNetwork.PLL.Views
     }
 
 
+    
 }

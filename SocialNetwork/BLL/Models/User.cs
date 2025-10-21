@@ -44,6 +44,8 @@ namespace SocialNetwork.BLL.Models
             this.IncomingMessages = incomingMessages;
             this.OutgoingMessages = outgoingMessages;
         }
+
+        
     }
 
 }

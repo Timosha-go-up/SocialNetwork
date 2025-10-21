@@ -22,8 +22,7 @@ namespace SocialNetwork.BLL.Services.UserServices.Common
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
-
-            // Получаем email друга по friend_id
+            
             var friendUser = _userRepository.FindById(entity.friend_id);
             var friendEmail = friendUser?.email ?? "unknown@example.com";
 

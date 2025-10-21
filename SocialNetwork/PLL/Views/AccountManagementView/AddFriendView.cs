@@ -24,8 +24,8 @@ namespace SocialNetwork.PLL.Views.AccountManagementView
 
         public void Show(User currentUser)
         {
-            Console.Write("Введите email друга для добавления: ");
-            string friendEmail = Console.ReadLine();
+            Write("Введите email друга для добавления: ");
+            string friendEmail = ReadLine();
 
             try
             {

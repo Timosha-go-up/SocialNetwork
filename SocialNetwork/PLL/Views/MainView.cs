@@ -1,4 +1,5 @@
-﻿using SocialNetwork.PLL.Views.AccountManagementView;
+﻿using SocialNetwork.PLL.MenuDesign;
+using SocialNetwork.PLL.Views.AccountManagementView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,32 +12,43 @@ namespace SocialNetwork.PLL.Views
     {
         private readonly AuthenticationView _authenticationView;
         private readonly RegistrationView _registrationView;
-
+        
         public MainView(AuthenticationView authenticationView, RegistrationView registrationView)
         {
             _authenticationView = authenticationView;
             _registrationView = registrationView;
+           
         }
 
         public void Show()
         {
-            Console.WriteLine("\n\nВойти в профиль (нажмите 1)");
-            Console.WriteLine("Зарегистрироваться (нажмите 2)");
+          MenuData menuData = new
+          (
+             texts: ["Войти в профиль", "Зарегистрироваться"],
+             suffixes: ["(нажмите)", "(нажмите)"],
+             numbers: [1, 2]
+          );
 
-            switch (Console.ReadLine())
+          var menuItems = MenuItem.CreateFromData(menuData);
+          MenuFormat.Print(menuItems);
+                               
+            switch (ReadLine())
             {
                 case "1":
-                    _authenticationView.Show(); // Используем переданный экземпляр
+                    _authenticationView.Show(); 
                     break;
                 case "2":
-                    _registrationView.Show();   // Используем переданный экземпляр
+                    _registrationView.Show();   
                     break;
 
                 default:
-                    Console.WriteLine("wrong input");
+                    WriteLine("wrong input");
                     break;
             }
         }
+      
+        }
+       
     }
 
-}
+

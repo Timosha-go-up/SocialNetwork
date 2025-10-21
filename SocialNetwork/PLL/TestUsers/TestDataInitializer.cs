@@ -2,7 +2,7 @@
 using SocialNetwork.BLL.Services.UserServices;
 using SocialNetwork.DAL.Repositories;
 
-namespace SocialNetwork
+namespace SocialNetwork.PLL.TestUsers
 {
     // Создаем отдельный класс для работы с тестовыми данными
     
@@ -43,7 +43,8 @@ namespace SocialNetwork
 
         private List<UserRegistrationData> GetTestUserList()
         {
-            return [
+            return
+            [
                 new() {
                 FirstName = "Иван",
                 LastName = "Иванов",

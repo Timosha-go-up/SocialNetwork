@@ -3,7 +3,6 @@ using SocialNetwork.BLL.Services;
 using SocialNetwork.PLL.Views;
 using SocialNetwork.PLL.Views.AccountManagementView;
 using SocialNetwork.PLL.Views.AccountManagementView.MessageViews;
-
 namespace SocialNetwork
 {
     class Program
@@ -12,11 +11,7 @@ namespace SocialNetwork
         {    
             // инициализация тестовых пользователей
             var deps = new ServiceContainer(initializeTestData: true);
-            //без тестовых пользователей
-            // var deps = new ServiceContainer();
-
-
-
+           
             // Представления пользователя
             var userInfoView = new UserInfoView();
             var userDataUpdateView = new UserDataUpdateView(deps.UserProfileService);
