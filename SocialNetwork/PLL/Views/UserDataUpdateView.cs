@@ -1,21 +1,18 @@
-﻿using SocialNetwork.BLL.Models;
-using SocialNetwork.BLL.Services;
-using SocialNetwork.BLL.Services.UserServices;
+﻿using SocialNetwork.BLL.Exceptions;
+using SocialNetwork.BLL.Models;
 using SocialNetwork.PLL.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SocialNetwork.PLL.Views.AccountManagementView
+namespace SocialNetwork.PLL.Views
 {
     public class UserDataUpdateView
     {
-        UserProfileService _profileService;
-        public UserDataUpdateView(UserProfileService profileService)
+        UserService userService;
+        public UserDataUpdateView(UserService userService)
         {
-            this._profileService = profileService;
+            this.userService = userService;
         }
 
         public void Show(User user)
@@ -35,10 +32,9 @@ namespace SocialNetwork.PLL.Views.AccountManagementView
             Console.Write("Моя любимая книга:");
             user.FavoriteBook = Console.ReadLine();
 
-            this._profileService.Update(user);
+            this.userService.Update(user);
 
             SuccessMessage.Show("Ваш профиль успешно обновлён!");
         }
     }
-
 }

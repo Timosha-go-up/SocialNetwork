@@ -1,47 +1,49 @@
-﻿using SocialNetwork.BLL.Models;
+﻿using SocialNetwork.BLL.Exceptions;
+using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
+using SocialNetwork.PLL;
 using SocialNetwork.PLL.Views;
-using SocialNetwork.PLL.Views.AccountManagementView;
-using SocialNetwork.PLL.Views.AccountManagementView.MessageViews;
+using System;
+using System.Linq;
+
 namespace SocialNetwork
 {
     class Program
     {
+        static MessageService messageService;
+        public static FriendService friendServise;
+        public static AddFriendView addFriendView;
+        static UserService userService;
+        public static MainView mainView;
+        public static RegistrationView registrationView;
+        public static AuthenticationView authenticationView;
+        public static UserMenuView userMenuView;
+        public static UserInfoView userInfoView;
+        public static UserDataUpdateView userDataUpdateView;
+        public static MessageSendingView messageSendingView;
+        public static UserIncomingMessageView userIncomingMessageView;
+        public static UserOutcomingMessageView userOutcomingMessageView;
+
         static void Main(string[] args)
-        {    
-            // инициализация тестовых пользователей
-            var deps = new ServiceContainer(initializeTestData: true);
-           
-            // Представления пользователя
-            var userInfoView = new UserInfoView();
-            var userDataUpdateView = new UserDataUpdateView(deps.UserProfileService);
+        {
+            
 
-            // Сообщения
-            var messageSendingView = new MessageSendingView(deps.MessageService, deps.UserProfileService);
-            var userIncomingMessageView = new UserIncomingMessageView();
-            var userOutcomingMessageView = new UserOutgoingMessageView();
-
-            // Другие представления
-            var registrationView = new RegistrationView(deps.UserRegistrationService);
-            var addFriendView = new AddFriendView(deps.FriendService, deps.UserProfileService);
-
-            // Составные представления
-            var userMenuView = new UserMenuView(
-                deps.UserProfileService,
-                userInfoView,
-                userDataUpdateView,
-                addFriendView,
-                messageSendingView,
-                userIncomingMessageView,
-                userOutcomingMessageView
-            );
-
-            var authenticationView = new AuthenticationView(
-                deps.UserAuthenticationService,userMenuView
-                
-            );
-
-            var mainView = new MainView(authenticationView,registrationView);
+            userService = new UserService();
+            messageService = new MessageService();
+            friendServise = new FriendService();
+            addFriendView = new AddFriendView();
+            mainView = new MainView();
+            registrationView = new RegistrationView(userService);
+            authenticationView = new AuthenticationView(userService);
+            userMenuView = new UserMenuView(userService);
+            userInfoView = new UserInfoView();
+            userDataUpdateView = new UserDataUpdateView(userService);
+            messageSendingView = new MessageSendingView(messageService, userService);
+            userIncomingMessageView = new UserIncomingMessageView();
+            userOutcomingMessageView = new UserOutcomingMessageView();
+                       
+            var testUsers = new TestUsers();
+            testUsers.CreateTestUsers();
 
 
             while (true)

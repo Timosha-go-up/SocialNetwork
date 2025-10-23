@@ -2,23 +2,14 @@
 using SocialNetwork.BLL.Models;
 using SocialNetwork.DAL.Entities;
 using SocialNetwork.DAL.Repositories;
-using SocialNetwork.DAL.Repositories.SocialNetwork.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.BLL.Services
 {
-    public interface IMessageService
-    {
-        IEnumerable<Message> GetIncomingMessagesByUserId(int recipientId);
-        IEnumerable<Message> GetOutcomingMessagesByUserId(int senderId);
-        void SendMessage(MessageSendingData messageSendingData);
-    }
-
-    public class MessageService : IMessageService
+    public class MessageService
     {
         IMessageRepository messageRepository;
         IUserRepository userRepository;
@@ -80,5 +71,4 @@ namespace SocialNetwork.BLL.Services
                 throw new Exception();
         }
     }
-
 }

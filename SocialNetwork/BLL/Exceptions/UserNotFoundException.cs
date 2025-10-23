@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SocialNetwork.BLL.Models;
+using System;
 
 namespace SocialNetwork.BLL.Exceptions
 {
     public class UserNotFoundException : Exception
     {
-        public UserNotFoundException()
-        {
-        }
+        public UserNotFoundException() : base("Пользователь не найден") { }
+        public UserNotFoundException(string message) : base(message) { }
 
-        public UserNotFoundException(string? message) : base(message)
-        {
-        }
+
+ }
+
+
     }
-}

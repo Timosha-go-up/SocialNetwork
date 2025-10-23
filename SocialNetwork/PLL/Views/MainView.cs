@@ -1,54 +1,37 @@
-﻿using SocialNetwork.PLL.MenuDesign;
-using SocialNetwork.PLL.Views.AccountManagementView;
+﻿using SocialNetwork.BLL.Models;
+using SocialNetwork.PLL.MenuDesign;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using static SocialNetwork.PLL.MenuDesign.MenuCollection;
 
 namespace SocialNetwork.PLL.Views
 {
     public class MainView
     {
-        private readonly AuthenticationView _authenticationView;
-        private readonly RegistrationView _registrationView;
-        
-        public MainView(AuthenticationView authenticationView, RegistrationView registrationView)
-        {
-            _authenticationView = authenticationView;
-            _registrationView = registrationView;
-           
-        }
-
         public void Show()
         {
-          MenuData menuData = new
-          (
-             texts: ["Войти в профиль", "Зарегистрироваться"],
-             suffixes: ["(нажмите)", "(нажмите)"],
-             numbers: [1, 2]
-          );
+            var menu = new MenuCollection();
+           
+            menu.Add(new MenuItem("Войти в профиль", number: 1));
+            menu.Add(new MenuItem("Зарегистрироваться", number: 2));
+            MenuFormat.Print(menu._items);
+           
 
-          var menuItems = MenuItem.CreateFromData(menuData);
-          MenuFormat.Print(menuItems);
-                               
-            switch (ReadLine())
+            switch (Console.ReadLine())
             {
                 case "1":
-                    _authenticationView.Show(); 
-                    break;
-                case "2":
-                    _registrationView.Show();   
-                    break;
+                    {
+                        Program.authenticationView.Show();
+                        break;
+                    }
 
-                default:
-                    WriteLine("wrong input");
-                    break;
+                case "2":
+                    {
+                        Program.registrationView.Show();
+                        break;
+                    }
             }
         }
-      
-        }
-       
     }
-
-
+}

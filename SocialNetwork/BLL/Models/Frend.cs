@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.BLL.Models
 {
-    public class Friend
+    public class Frend
     {
-        public int Id { get; }
-        public int UserId { get; }
-        public int FriendId { get; }
-        public string FriendEmail { get; }  // Удобно для отображения
+        public int id { get; set; }
+        public int user_id { get; set; }
+        public int friend_id { get; set; }
 
-        public Friend(int id, int userId, int friendId, string friendEmail)
+        public Frend(int Id,int UserId,int FriendId)
         {
-            Id = id;
-            UserId = userId;
-            FriendId = friendId;
-            FriendEmail = friendEmail;
+            int id = Id;
+            user_id = UserId;
+            friend_id = FriendId;
         }
     }
-
 }

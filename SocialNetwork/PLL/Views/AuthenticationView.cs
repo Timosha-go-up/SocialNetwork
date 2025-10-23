@@ -1,27 +1,18 @@
 ﻿using SocialNetwork.BLL.Exceptions;
 using SocialNetwork.BLL.Models;
-using SocialNetwork.BLL.Services;
-using SocialNetwork.BLL.Services.UserServices;
 using SocialNetwork.PLL.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SocialNetwork.PLL.Views.AccountManagementView
+namespace SocialNetwork.PLL.Views
 {
     public class AuthenticationView
     {
-        private readonly UserAuthenticationService _userAuthenticationService;
-        private readonly UserMenuView _userMenuView;
-
-        public AuthenticationView(
-            UserAuthenticationService userAuthenticationService,
-            UserMenuView userMenuView)
+        UserService userService;
+        public AuthenticationView(UserService userService)
         {
-            _userAuthenticationService = userAuthenticationService;
-            _userMenuView = userMenuView;
+            this.userService = userService;
         }
 
         public void Show()
@@ -36,23 +27,24 @@ namespace SocialNetwork.PLL.Views.AccountManagementView
 
             try
             {
-                var user = _userAuthenticationService.Authenticate(authenticationData);
+                var user = this.userService.Authenticate(authenticationData);
 
                 SuccessMessage.Show("Вы успешно вошли в социальную сеть!");
                 SuccessMessage.Show("Добро пожаловать " + user.FirstName);
 
-                _userMenuView.Show(user); // Вызываем метод у переданного экземпляра
+                Program.userMenuView.Show(user);
             }
+
             catch (WrongPasswordException)
             {
                 AlertMessage.Show("Пароль не корректный!");
             }
+
             catch (UserNotFoundException)
             {
                 AlertMessage.Show("Пользователь не найден!");
             }
+
         }
-    }
-
-
+    } 
 }

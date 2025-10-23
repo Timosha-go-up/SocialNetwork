@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SocialNetwork.PLL.Views.AccountManagementView.MessageViews
+namespace SocialNetwork.PLL.Views
 {
-    public class UserOutgoingMessageView
+    public class UserOutcomingMessageView
     {
         public void Show(IEnumerable<Message> outcomingMessages)
         {
@@ -25,5 +24,4 @@ namespace SocialNetwork.PLL.Views.AccountManagementView.MessageViews
             });
         }
     }
-
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SocialNetwork.BLL.Models
 {
@@ -21,13 +17,13 @@ namespace SocialNetwork.BLL.Models
         public IEnumerable<Message> OutgoingMessages { get; }
 
         public User(
-            int id,
-            string firstName,
-            string lastName,
-            string password,
-            string email,
-            string photo,
-            string favoriteMovie,
+            int id, 
+            string firstName, 
+            string lastName, 
+            string password, 
+            string email, 
+            string photo, 
+            string favoriteMovie, 
             string favoriteBook,
             IEnumerable<Message> incomingMessages,
             IEnumerable<Message> outgoingMessages
@@ -44,8 +40,5 @@ namespace SocialNetwork.BLL.Models
             this.IncomingMessages = incomingMessages;
             this.OutgoingMessages = outgoingMessages;
         }
-
-        
     }
-
 }

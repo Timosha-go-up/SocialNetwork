@@ -1,24 +1,21 @@
 ﻿using SocialNetwork.BLL.Exceptions;
 using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
-using SocialNetwork.BLL.Services.UserServices;
 using SocialNetwork.PLL.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SocialNetwork.PLL.Views.AccountManagementView.MessageViews
+namespace SocialNetwork.PLL.Views
 {
     public class MessageSendingView
     {
-        IUserProfileService userProfileService;
-        IMessageService messageService;
-        public MessageSendingView(IMessageService messageService, IUserProfileService userService)
+        UserService userService;
+        MessageService messageService;
+        public MessageSendingView(MessageService messageService, UserService userService)
         {
             this.messageService = messageService;
-            this.userProfileService = userService;
+            this.userService = userService;
         }
 
         public void Show(User user)
@@ -39,7 +36,7 @@ namespace SocialNetwork.PLL.Views.AccountManagementView.MessageViews
 
                 SuccessMessage.Show("Сообщение успешно отправлено!");
 
-                user = userProfileService.FindById(user.Id);
+                user = userService.FindById(user.Id);
             }
 
             catch (UserNotFoundException)
@@ -60,5 +57,3 @@ namespace SocialNetwork.PLL.Views.AccountManagementView.MessageViews
         }
     }
 }
-
-
