@@ -27,13 +27,13 @@ namespace SocialNetwork.PLL.Views
                 var menu = new MenuCollection();
                 menu.Add(new MenuItem("Входящие сообщения:",string.Empty, number: incomingCount));
                 menu.Add(new MenuItem("Исходящие сообщения:",string.Empty, number: outgoingCount));
-                menu.Add(new MenuItem("Просмотреть информацию о моём профиле", string.Empty, number: 1));
-                menu.Add(new MenuItem("Редактировать мой профиль", string.Empty, number: 2));
-                menu.Add(new MenuItem("Добавить в друзья", string.Empty, number: 3));
-                menu.Add(new MenuItem("Написать сообщение", string.Empty, number: 4));
-                menu.Add(new MenuItem("Просмотреть входящие сообщения ", string.Empty, number: 5));
-                menu.Add(new MenuItem("Просмотреть исходящие сообщения ", string.Empty, number: 6));
-                menu.Add(new MenuItem("Выйти из профиля ", string.Empty, number: 7));
+                menu.Add(new MenuItem("Просмотреть информацию о моём профиле",  number: 1));
+                menu.Add(new MenuItem("Редактировать мой профиль",  number: 2));
+                menu.Add(new MenuItem("Добавить в друзья",  number: 3));
+                menu.Add(new MenuItem("Написать сообщение",  number: 4));
+                menu.Add(new MenuItem("Просмотреть входящие сообщения ",  number: 5));
+                menu.Add(new MenuItem("Просмотреть исходящие сообщения ",  number: 6));
+                menu.Add(new MenuItem("Выйти из профиля ",  number: 7));
                 MenuFormat.Print(menu._items);
                
                 string keyValue = Console.ReadLine();
